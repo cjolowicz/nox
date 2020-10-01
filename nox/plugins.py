@@ -13,17 +13,11 @@
 # limitations under the License.
 
 import functools
-from typing import Any
-from typing import Dict
-from typing import Optional
-from typing import List
-from typing import Tuple
-
-import pluggy
+from typing import Any, Dict, List, Optional, Tuple
 
 import nox
+import pluggy
 from nox.sessions import Session
-
 
 _manager = pluggy.PluginManager("nox")
 hookimpl = pluggy.HookimplMarker("nox")
