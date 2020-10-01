@@ -26,7 +26,7 @@ import nox.registry
 import nox.sessions
 import nox.virtualenv
 import pytest
-from nox import _options
+from nox import _options, plugins
 from nox.logger import logger
 
 
@@ -75,6 +75,10 @@ class TestSession:
         runner.venv.env = {}
         runner.venv.bin_paths = ["/no/bin/for/you"]
         return nox.sessions.Session(runner=runner), runner
+
+    @pytest.fixture(autouse=True, scope="class")
+    def load_plugins(self):
+        plugins.load()
 
     def test_create_tmp(self):
         session, runner = self.make_session_and_runner()
