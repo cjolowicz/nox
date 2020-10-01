@@ -18,14 +18,23 @@ import json
 import os
 import types
 from argparse import Namespace
-from typing import List, Union
+from typing import List, Optional, Union
 
 import nox
 from colorlog.escape_codes import parse_colors
-from nox import _options, registry
+from nox import _options, plugins, registry
 from nox.logger import logger
 from nox.manifest import WARN_PYTHONS_IGNORED, Manifest
 from nox.sessions import Result
+
+
+def load_plugins(global_config: Namespace) -> Optional[int]:
+    """Load the plugins."""
+    try:
+        plugins.initialize_manager()
+    except Exception:
+        logger.exception("Failed to load plugins")
+        return 2
 
 
 def load_nox_module(global_config: Namespace) -> Union[types.ModuleType, int]:
