@@ -19,6 +19,7 @@ from typing import Tuple
 
 import pluggy
 
+import nox
 from nox.sessions import Session
 
 
