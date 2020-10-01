@@ -32,6 +32,7 @@ def load_plugins(global_config: Namespace) -> Optional[int]:
     """Load the plugins."""
     try:
         plugins.load()
+        return None
     except Exception:
         logger.exception("Failed to load plugins")
         return 2
