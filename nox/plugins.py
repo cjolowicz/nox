@@ -30,8 +30,8 @@ def nox_session_install(session: Session, *args: str, **kwargs: Any) -> Optional
     """Install packages inside the session environment."""
 
 
-def initialize_manager():
-    """Initialize the plugin manager."""
+def load():
+    """Load the plugins."""
     manager.add_hookspecs(nox.plugins)
     manager.load_setuptools_entrypoints("nox")
     manager.check_pending()

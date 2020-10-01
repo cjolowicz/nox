@@ -31,7 +31,7 @@ from nox.sessions import Result
 def load_plugins(global_config: Namespace) -> Optional[int]:
     """Load the plugins."""
     try:
-        plugins.initialize_manager()
+        plugins.load()
     except Exception:
         logger.exception("Failed to load plugins")
         return 2
