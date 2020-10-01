@@ -34,7 +34,7 @@ from typing import (
 
 import nox.command
 import py
-from nox import _typing
+from nox import _typing, plugins
 from nox._decorators import Func
 from nox.logger import logger
 from nox.virtualenv import CondaEnv, PassthroughEnv, ProcessEnv, VirtualEnv
@@ -419,6 +419,9 @@ class Session:
             )
         if not args:
             raise ValueError("At least one argument required to install().")
+
+        if plugins.manager.hook.nox_session_install(self, *args, **kwargs):
+            return
 
         if "silent" not in kwargs:
             kwargs["silent"] = True
