@@ -21,9 +21,9 @@ from nox.sessions import Session
 
 
 _manager = pluggy.PluginManager("nox")
-hooks = _manager.hook
 hookimpl = pluggy.HookimplMarker("nox")
 hookspec = pluggy.HookspecMarker("nox")
+hooks = _manager.hook
 
 
 @hookspec(firstresult=True)
