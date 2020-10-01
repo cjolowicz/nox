@@ -34,7 +34,7 @@ def nox_session_install(
 
 # Avoid multiple initialization during unit tests.
 @functools.lru_cache(maxsize=None)
-def load():
+def load() -> None:
     """Load the plugins."""
     _manager.add_hookspecs(nox.plugins)
     _manager.load_setuptools_entrypoints("nox")
