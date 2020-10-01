@@ -49,6 +49,7 @@ def main() -> None:
     exit_code = workflow.execute(
         global_config=args,
         workflow=(
+            tasks.load_plugins,
             tasks.load_nox_module,
             tasks.merge_noxfile_options,
             tasks.discover_manifest,
