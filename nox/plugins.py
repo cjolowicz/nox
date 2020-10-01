@@ -12,10 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from typing import Any
+from typing import Optional
+
 import pluggy
+
+from nox.sessions import Session
+
 
 hookimpl = pluggy.HookimplMarker("nox")
 hookspec = pluggy.HookspecMarker("nox")
+
+
+@hookspec(firstresult=True)
+def nox_session_install(session: Session, *args: str, **kwargs: Any) -> Optional[bool]:
+    """Install packages inside the session environment."""
+
 
 def get_plugin_manager():
     """Initialize the plugin manager."""
