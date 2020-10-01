@@ -14,7 +14,9 @@
 
 import functools
 from typing import Any
+from typing import Dict
 from typing import Optional
+from typing import List
 from typing import Tuple
 
 import pluggy
@@ -31,7 +33,7 @@ hooks = _manager.hook
 
 @hookspec(firstresult=True)
 def nox_session_install(
-    session: Session, *args: str, **kwargs: Any
+    session: Session, args: List[str], kwargs: Dict[str, Any]
 ) -> Optional[Tuple[()]]:
     """Install packages inside the session environment."""
 
