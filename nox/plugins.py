@@ -15,6 +15,7 @@
 import pluggy
 
 hookimpl = pluggy.HookimplMarker("nox")
+hookspec = pluggy.HookspecMarker("nox")
 
 def get_plugin_manager():
     """Initialize the plugin manager."""
