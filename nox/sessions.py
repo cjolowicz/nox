@@ -420,9 +420,10 @@ class Session:
         if not args:
             raise ValueError("At least one argument required to install().")
 
-        if plugins.hooks.nox_session_install(self, *args, **kwargs):
-            return
+        if not plugins.hooks.nox_session_install(self, *args, **kwargs):
+            self._install(*args, **kwargs)
 
+    def _install(self, *args: str, **kwargs: Any) -> None:
         if "silent" not in kwargs:
             kwargs["silent"] = True
 
