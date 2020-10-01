@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import functools
 from typing import Any
 from typing import Optional
 from typing import Tuple
@@ -34,6 +35,8 @@ def nox_session_install(
     """Install packages inside the session environment."""
 
 
+# Avoid multiple initialization during unit tests.
+@functools.lru_cache(maxsize=None)
 def load():
     """Load the plugins."""
     _manager.add_hookspecs(nox.plugins)
