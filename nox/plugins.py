@@ -20,8 +20,8 @@ import pluggy
 from nox.sessions import Session
 
 
-manager = pluggy.PluginManager("nox")
-hooks = manager.hook
+_manager = pluggy.PluginManager("nox")
+hooks = _manager.hook
 hookimpl = pluggy.HookimplMarker("nox")
 hookspec = pluggy.HookspecMarker("nox")
 
@@ -33,6 +33,6 @@ def nox_session_install(session: Session, *args: str, **kwargs: Any) -> Optional
 
 def load():
     """Load the plugins."""
-    manager.add_hookspecs(nox.plugins)
-    manager.load_setuptools_entrypoints("nox")
-    manager.check_pending()
+    _manager.add_hookspecs(nox.plugins)
+    _manager.load_setuptools_entrypoints("nox")
+    _manager.check_pending()
