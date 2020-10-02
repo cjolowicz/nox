@@ -56,5 +56,6 @@ def nox_session_install(
 def load() -> None:
     """Load the plugins."""
     _manager.add_hookspecs(nox.plugins)
+    _manager.register(nox.plugins)
     _manager.load_setuptools_entrypoints("nox")
     _manager.check_pending()
