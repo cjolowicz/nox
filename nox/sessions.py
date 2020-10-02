@@ -454,15 +454,6 @@ class Session:
         raise _SessionSkip(*args)
 
 
-@plugins.hookimpl
-def nox_session_install(
-    session: Session, args: List[str], kwargs: Dict[str, Any]
-) -> Optional[plugins.Done]:
-    """Implement the `plugins.nox_session_install` hook."""
-    session._install(*args, **kwargs)
-    return plugins.DONE
-
-
 class SessionRunner:
     def __init__(
         self,
