@@ -33,7 +33,7 @@ def load_plugins(global_config: Namespace) -> Optional[int]:
     try:
         plugins.load()
         return None
-    except Exception:
+    except Exception:  # pragma: no cover
         logger.exception("Failed to load plugins")
         return 2
 
