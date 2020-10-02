@@ -411,6 +411,11 @@ class Session:
 
         .. _pip: https://pip.readthedocs.org
         """
+        plugins.hooks.nox_session_install(
+            session=self, args=args, kwargs=kwargs
+        )
+
+    def _install(self, *args: str, **kwargs: Any) -> None:
         if not isinstance(
             self._runner.venv, (CondaEnv, VirtualEnv, PassthroughEnv)
         ):  # pragma: no cover
@@ -420,12 +425,6 @@ class Session:
         if not args:
             raise ValueError("At least one argument required to install().")
 
-        if not plugins.hooks.nox_session_install(
-            session=self, args=args, kwargs=kwargs
-        ):
-            self._install(*args, **kwargs)
-
-    def _install(self, *args: str, **kwargs: Any) -> None:
         if "silent" not in kwargs:
             kwargs["silent"] = True
 
@@ -455,6 +454,15 @@ class Session:
     def skip(self, *args: Any) -> "_typing.NoReturn":
         """Immediately skips the session and optionally logs a warning."""
         raise _SessionSkip(*args)
+
+
+@plugins.hookimpl
+def nox_session_install(
+    session: Session, args: List[str], kwargs: Dict[str, Any]
+) -> Optional[Tuple[()]]:
+    """Implement the `plugins.nox_session_install` hook."""
+    session._install(*args, **kwargs)
+    return ()
 
 
 class SessionRunner:
