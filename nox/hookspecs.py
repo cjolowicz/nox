@@ -12,33 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import functools
+import enum
 from typing import Any, Dict, List, Optional, Tuple
 
-import nox
-from nox.hookspecs import Done, DONE
 import pluggy
+
 from nox.sessions import Session
 
-_manager = pluggy.PluginManager("nox")
-hookimpl = pluggy.HookimplMarker("nox")
-hooks = _manager.hook
+
+hookspec = pluggy.HookspecMarker("nox")
 
 
-@hookimpl
+class Done(enum.Enum):
+    """Return from `firstresult` hooks to terminate pluggy's call loop."""
+
+    DONE = "done"
+
+
+DONE = Done.DONE
+
+
+@hookspec(firstresult=True)
 def nox_session_install(
     session: Session, args: List[str], kwargs: Dict[str, Any]
 ) -> Optional[Done]:
-    """Implement the `plugins.nox_session_install` hook."""
-    session._install(*args, **kwargs)
-    return DONE
-
-
-# Avoid multiple initialization during unit tests.
-@functools.lru_cache(maxsize=None)
-def load() -> None:
-    """Load the plugins."""
-    _manager.add_hookspecs(nox.hookspecs)
-    _manager.register(nox.plugins)
-    _manager.load_setuptools_entrypoints("nox")
-    _manager.check_pending()
+    """Install packages inside the session environment."""
