@@ -12,22 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import functools
+from typing import Any, Dict, List, Optional
 
+from nox.hookspecs import Done, DONE
+from nox.sessions import Session
 import pluggy
 
-_manager = pluggy.PluginManager("nox")
-hooks = _manager.hook
+
+hookimpl = pluggy.HookimplMarker("nox")
 
 
-# Avoid multiple initialization during unit tests.
-@functools.lru_cache(maxsize=None)
-def load() -> None:
-    """Load the plugins."""
-    import nox.hookspecs
-    import nox.hookimpl
-
-    _manager.add_hookspecs(nox.hookspecs)
-    _manager.register(nox.hookimpl)
-    _manager.load_setuptools_entrypoints("nox")
-    _manager.check_pending()
+@hookimpl
+def nox_session_install(
+    session: Session, args: List[str], kwargs: Dict[str, Any]
+) -> Optional[Done]:
+    """Implement the `plugins.nox_session_install` hook."""
+    session._install(*args, **kwargs)
+    return DONE
