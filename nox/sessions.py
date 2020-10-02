@@ -411,7 +411,7 @@ class Session:
 
         .. _pip: https://pip.readthedocs.org
         """
-        plugins.hooks.nox_session_install(session=self, args=args, kwargs=kwargs)
+        plugins.hooks.nox_session_install(session=self, args=[*args], kwargs=kwargs)
 
     def _install(self, *args: str, **kwargs: Any) -> None:
         if not isinstance(
