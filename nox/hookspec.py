@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import enum
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 import pluggy
 
