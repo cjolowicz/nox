@@ -22,6 +22,6 @@ from nox.sessions import Session
 def nox_session_install(
     session: Session, args: List[str], kwargs: Dict[str, Any]
 ) -> Optional[Done]:
-    """Implement the `plugins.nox_session_install` hook."""
+    """Implement the `nox_session_install` hook."""
     session._install(*args, **kwargs)
     return DONE
