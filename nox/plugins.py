@@ -24,10 +24,10 @@ hooks = _manager.hook
 @functools.lru_cache(maxsize=None)
 def load() -> None:
     """Load the plugins."""
-    import nox.hookspecs
+    import nox.hookspec
     import nox.hookimpl
 
-    _manager.add_hookspecs(nox.hookspecs)
+    _manager.add_hookspecs(nox.hookspec)
     _manager.register(nox.hookimpl)
     _manager.load_setuptools_entrypoints("nox")
     _manager.check_pending()
