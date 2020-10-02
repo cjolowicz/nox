@@ -29,7 +29,14 @@ from nox.sessions import Result
 
 
 def load_plugins(global_config: Namespace) -> Optional[int]:
-    """Load the plugins."""
+    """Load the plugins.
+
+    Args:
+        global_config (.nox.main.GlobalConfig): The global config.
+
+    Returns:
+        Optional[int]: ``2`` if loading failed, ``None`` otherwise.
+    """
     try:
         plugins.load()
         return None
