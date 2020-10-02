@@ -23,7 +23,24 @@ hooks = _manager.hook
 # Avoid multiple initialization during unit tests.
 @functools.lru_cache(maxsize=None)
 def load() -> None:
-    """Load the plugins."""
+    """Load the plugins.
+
+    Register the hook specifications (:mod:`nox.hookspec`) and the default hook
+    implementations (:mod:`nox.hookimpl`), then scan the setuptools entry
+    points for Nox plugins. Plugins may be registered by including a section like
+    the following in setup.cfg, for an imaginary ``nox-example`` plugin::
+
+    .. code-block:: ini
+
+        [options.entry_points]
+        nox =
+            example = nox_example
+
+    .. note::
+
+        To facilitate testing, this function may be called multiple times. It
+        is a no-op after the first call.
+    """
     import nox.hookspec
     import nox.hookimpl
 
