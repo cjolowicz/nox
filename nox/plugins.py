@@ -42,8 +42,8 @@ def nox_session_install(
     """Install packages inside the session environment."""
 
 
-@hookimpl
-def nox_session_install(
+@hookimpl(specname="nox_session_install")
+def nox_session_install_impl(
     session: Session, args: List[str], kwargs: Dict[str, Any]
 ) -> Optional[Done]:
     """Implement the `plugins.nox_session_install` hook."""
