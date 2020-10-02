@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import enum
 import functools
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -25,10 +26,19 @@ hookspec = pluggy.HookspecMarker("nox")
 hooks = _manager.hook
 
 
+class Done(enum.Enum):
+    """Return from `firstresult` hooks to terminate pluggy's call loop."""
+
+    DONE = "done"
+
+
+DONE = Done.DONE
+
+
 @hookspec(firstresult=True)
 def nox_session_install(
     session: Session, args: List[str], kwargs: Dict[str, Any]
-) -> Optional[Tuple[()]]:
+) -> Optional[Done]:
     """Install packages inside the session environment."""
 
 
