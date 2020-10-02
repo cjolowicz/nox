@@ -414,6 +414,7 @@ class Session:
         plugins.hooks.nox_session_install(session=self, args=[*args], kwargs=kwargs)
 
     def _install(self, *args: str, **kwargs: Any) -> None:
+        """The default implementation of install()."""
         if not isinstance(
             self._runner.venv, (CondaEnv, VirtualEnv, PassthroughEnv)
         ):  # pragma: no cover
