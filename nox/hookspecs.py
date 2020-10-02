@@ -21,6 +21,7 @@ from nox.sessions import Session
 
 
 hookspec = pluggy.HookspecMarker("nox")
+hookimpl = pluggy.HookimplMarker("nox")
 
 
 class Done(enum.Enum):

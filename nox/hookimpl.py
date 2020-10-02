@@ -14,12 +14,8 @@
 
 from typing import Any, Dict, List, Optional
 
-from nox.hookspecs import Done, DONE
+from nox.hookspecs import Done, DONE, hookimpl
 from nox.sessions import Session
-import pluggy
-
-
-hookimpl = pluggy.HookimplMarker("nox")
 
 
 @hookimpl

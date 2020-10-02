@@ -15,7 +15,7 @@
 from nox._options import noxfile_options as options
 from nox._parametrize import Param as param
 from nox._parametrize import parametrize_decorator as parametrize
-from nox.hookimpl import hookimpl
+from nox.hookspecs import hookimpl
 from nox.registry import session_decorator as session
 from nox.sessions import Session
 
