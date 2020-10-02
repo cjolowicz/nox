@@ -16,9 +16,7 @@ import enum
 from typing import Any, Dict, List, Optional
 
 import pluggy
-
 from nox.sessions import Session
-
 
 hookspec = pluggy.HookspecMarker("nox")
 hookimpl = pluggy.HookimplMarker("nox")
