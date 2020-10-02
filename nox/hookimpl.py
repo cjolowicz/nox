@@ -14,7 +14,7 @@
 
 from typing import Any, Dict, List, Optional
 
-from nox.hookspec import Done, DONE, hookimpl
+from nox.hookspec import DONE, Done, hookimpl
 from nox.sessions import Session
 
 
