@@ -35,4 +35,20 @@ DONE = Done.DONE
 def nox_session_install(
     session: Session, args: List[str], kwargs: Dict[str, Any]
 ) -> Optional[Done]:
-    """Install packages inside the session environment."""
+    """Install packages inside the session environment.
+
+    Args:
+        session (~nox.sessions.Session): The session object.
+        args (List[str]): Command-line arguments for the installer. Plugins are
+            allowed to modify the argument list for processing by another hook
+            implementation.
+        kwargs (Dict[str, Any]): Keyword arguments for
+            :meth:`nox.sessions.Session.run`. Plugins are allowed to modify the
+            keyword arguments for processing by another hook implementation.
+
+    Returns:
+        Plugins should return :const:`nox.hookspec.DONE` if they have serviced
+        the installation request and control should return to the user. Return
+        ``None`` instead to let the default implementation (and any potential
+        other plugins) service the request.
+    """
